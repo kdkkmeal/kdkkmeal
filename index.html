@@ -763,14 +763,48 @@ async function doDelete(id) {
 }
 
 async function doInvite(rec, accept) {
-  const ns = accept ? "확인" : "거절";
-  records = records.map(function(r) {
-    return r.id === rec.id ? Object.assign({}, r, {상태: ns}) : r;
-  });
-  updateUI();
   setSyncing(true);
-  try { await nUpdate(rec.id, {"상태": pSel(ns)}); } catch(e) { console.error(e); }
+  try {
+    if (accept) {
+      // 확인: 본인 레코드만 확인 처리
+      records = records.map(function(r) {
+        return r.id === rec.id ? Object.assign({}, r, {상태: "확인"}) : r;
+      });
+      await nUpdate(rec.id, {"상태": pSel("확인")});
+
+    } else {
+      // 거절: 본인 레코드 거절 처리 + 같은 날짜/유형의 다른 참석자 레코드에서 이름 제거
+      records = records.map(function(r) {
+        return r.id === rec.id ? Object.assign({}, r, {상태: "거절"}) : r;
+      });
+      await nUpdate(rec.id, {"상태": pSel("거절")});
+
+      // 같은 그룹(등록자+날짜+유형이 같은) 레코드들에서 username 제거
+      const sameGroup = records.filter(function(r) {
+        return r.id !== rec.id
+          && r.등록자 === rec.등록자
+          && r.날짜   === rec.날짜
+          && r.유형   === rec.유형;
+      });
+      for (var i = 0; i < sameGroup.length; i++) {
+        const r = sameGroup[i];
+        // 참석자 문자열에서 username 제거
+        const newAtt = (r.참석자 || "")
+          .split(",")
+          .map(function(s) { return s.trim(); })
+          .filter(function(s) { return s !== username; })
+          .join(", ");
+        // 로컬 상태 업데이트
+        records = records.map(function(x) {
+          return x.id === r.id ? Object.assign({}, x, {참석자: newAtt}) : x;
+        });
+        // 노션 업데이트
+        await nUpdate(r.id, {"참석자": pText(newAtt)});
+      }
+    }
+  } catch(e) { console.error(e); }
   setSyncing(false);
+  updateUI();
 }
 
 // ══════════════════════════════════════════════════════════
