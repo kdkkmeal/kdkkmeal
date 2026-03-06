@@ -422,11 +422,11 @@ function renderList(id, recs, rowHtml){
 async function doAdd(type){
   const lbl={annual:"연차",dinner:"회식",entertain:"접대",payment:"결제"}[type];
   const ym=`${selYear}-${String(selMonth).padStart(2,"0")}`;
-  let date="",att="",amt=0,memo="",status="확인";
+  let date="",att="",amt=0,memo="";
 
-  if(type==="annual")      {date=document.getElementById("ann-date").value;}
-  else if(type==="dinner") {date=document.getElementById("din-date").value;att=document.getElementById("din-att").value.trim();if(att)status="대기";}
-  else if(type==="entertain"){date=document.getElementById("ent-date").value;att=document.getElementById("ent-att").value.trim();if(att)status="대기";}
+  if(type==="annual")        {date=document.getElementById("ann-date").value;}
+  else if(type==="dinner")   {date=document.getElementById("din-date").value;att=document.getElementById("din-att").value.trim();}
+  else if(type==="entertain"){date=document.getElementById("ent-date").value;att=document.getElementById("ent-att").value.trim();}
   else{date=document.getElementById("pay-date").value;amt=parseFloat(document.getElementById("pay-amt").value)||0;memo=document.getElementById("pay-memo").value;}
 
   if(!date)return;
@@ -434,9 +434,35 @@ async function doAdd(type){
   btn.disabled=true;btn.innerHTML='<div class="spin"></div>';
   setSyncing(true);
   try{
-    const props={"제목":pT(`${username}_${date}_${lbl}`),"사용자":pR(username),"년월":pR(ym),"유형":pS(lbl),"날짜":pDt(date),"참석자":pR(att),"금액":pN(amt),"상태":pS(status),"등록자":pR(username),"메모":pR(memo)};
-    const pg=await nC(RECORDS_DB,props);
-    records.push(parse(pg));
+    // 참석자 목록 파싱
+    const attList = att ? att.split(",").map(s=>s.trim()).filter(Boolean) : [];
+    // 전체 참석자 (등록자 포함)
+    const allAtt = attList.length ? [username,...attList].join(", ") : "";
+
+    // 1. 등록자 본인 레코드 (확인 상태)
+    const myProps={
+      "제목":pT(`${username}_${date}_${lbl}`),"사용자":pR(username),
+      "년월":pR(ym),"유형":pS(lbl),"날짜":pDt(date),
+      "참석자":pR(allAtt),"금액":pN(amt),"상태":pS("확인"),
+      "등록자":pR(username),"메모":pR(memo),
+    };
+    const myPg=await nC(RECORDS_DB,myProps);
+    records.push(parse(myPg));
+
+    // 2. 참석자 각각 별도 레코드 (대기 상태) - 회식/접대만
+    if((type==="dinner"||type==="entertain") && attList.length>0){
+      for(const person of attList){
+        const attProps={
+          "제목":pT(`${person}_${date}_${lbl}`),"사용자":pR(person),
+          "년월":pR(ym),"유형":pS(lbl),"날짜":pDt(date),
+          "참석자":pR(allAtt),"금액":pN(0),"상태":pS("대기"),
+          "등록자":pR(username),"메모":pR(memo),
+        };
+        const attPg=await nC(RECORDS_DB,attProps);
+        records.push(parse(attPg));
+      }
+    }
+
     if(type==="annual")document.getElementById("ann-date").value="";
     if(type==="dinner"){document.getElementById("din-date").value="";document.getElementById("din-att").value="";}
     if(type==="entertain"){document.getElementById("ent-date").value="";document.getElementById("ent-att").value="";}
