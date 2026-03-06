@@ -272,11 +272,51 @@ const TEAM_PW      = "kdkk";
 const USERS_DB     = "edd1fe309fe24ee3a78995b884059fa8";
 const RECORDS_DB   = "45939beb3e88416b84bbbf4af5f4e593";
 const MEAL_PRICE   = 11000;
+const HOLIDAY_API_KEY = "e01ce2b73040aa7ddb9bf365886b0a77d85dec427dcc5b9d8a5b5b05fb1e919b";
 
-const HOLIDAYS = new Set(["2025-01-01","2025-01-28","2025-01-29","2025-01-30","2025-03-01","2025-05-05","2025-05-06","2025-05-15","2025-06-06","2025-08-15","2025-10-03","2025-10-06","2025-10-07","2025-10-08","2025-10-09","2025-11-17","2025-12-25","2026-01-01","2026-02-16","2026-02-17","2026-02-18","2026-03-01","2026-05-05","2026-05-25","2026-06-06","2026-08-17","2026-09-24","2026-09-25","2026-09-26","2026-10-03","2026-10-09","2026-12-25"]);
+// ── 공휴일 API (공공데이터포털 한국천문연구원 특일정보) ─────────────────────────────
+const HOLIDAY_API_KEY = "e01ce2b73040aa7ddb9bf365886b0a77d85dec427dcc5b9d8a5b5b05fb1e919b";
+const holidayCache = {}; // { "2025-3": Set([...]) }
 
-function isWorkday(s){const d=new Date(s+"T00:00:00"),w=d.getDay();return w!==0&&w!==6&&!HOLIDAYS.has(s);}
-function workdays(y,m){const r=[],d=new Date(y,m-1,1);while(d.getMonth()===m-1){const s=`${y}-${String(m).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;if(isWorkday(s))r.push(s);d.setDate(d.getDate()+1);}return r;}
+async function fetchHolidays(year, month) {
+  const key = `${year}-${month}`;
+  if (holidayCache[key] !== undefined) return holidayCache[key];
+  holidayCache[key] = new Set(); // 빈 세트로 먼저 설정 (중복 호출 방지)
+  try {
+    const url = `https://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?solYear=${year}&solMonth=${String(month).padStart(2,"0")}&ServiceKey=${HOLIDAY_API_KEY}&_type=json&numOfRows=20`;
+    const proxied = `https://corsproxy.io/?url=${encodeURIComponent(url)}`;
+    const res = await fetch(proxied);
+    const data = await res.json();
+    const items = data?.response?.body?.items?.item;
+    if (items) {
+      const list = Array.isArray(items) ? items : [items];
+      list.forEach(item => {
+        if (item.isHoliday === "Y") {
+          const d = String(item.locdate);
+          const s = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`;
+          holidayCache[key].add(s);
+        }
+      });
+    }
+  } catch(e) { console.error("공휴일 API 오류:", e); }
+  return holidayCache[key];
+}
+
+function isWeekend(s) {
+  const w = new Date(s + "T00:00:00").getDay();
+  return w === 0 || w === 6;
+}
+
+async function workdays(y, m) {
+  const holidays = await fetchHolidays(y, m);
+  const r = [], d = new Date(y, m-1, 1);
+  while (d.getMonth() === m-1) {
+    const s = `${y}-${String(m).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+    if (!isWeekend(s) && !holidays.has(s)) r.push(s);
+    d.setDate(d.getDate()+1);
+  }
+  return r;
+}
 
 async function nReq(method,path,body){
   const url=`https://api.notion.com/v1${path}`;
@@ -310,23 +350,25 @@ async function loadRecords(){
   const ym=`${selYear}-${String(selMonth).padStart(2,"0")}`;
   document.getElementById("loading-bar").classList.remove("hidden");
   try{
-    const[a,b]=await Promise.all([
+    // 공휴일 API + 노션 데이터 동시 로드
+    const[a,b,_]=await Promise.all([
       nQ(RECORDS_DB,{and:[{property:"사용자",rich_text:{equals:username}},{property:"년월",rich_text:{equals:ym}}]}),
       nQ(RECORDS_DB,{and:[{property:"참석자",rich_text:{contains:username}},{property:"상태",select:{equals:"대기"}}]}),
+      fetchHolidays(selYear), // 공휴일 미리 캐시
     ]);
     const seen=new Set();
     records=[...a,...b].filter(p=>{if(seen.has(p.id))return false;seen.add(p.id);return true;}).map(parse);
   }catch(e){console.error(e);}
   document.getElementById("loading-bar").classList.add("hidden");
-  updateUI();
+  await updateUI();
 }
 
 function setSyncing(v){document.getElementById("sync-bar").classList.toggle("hidden",!v);}
 
 // ── UI update (no DOM recreation for inputs!) ─────────────────────────────────
-function updateUI(){
+async function updateUI(){
   const ym=`${selYear}-${String(selMonth).padStart(2,"0")}`;
-  const wd=workdays(selYear,selMonth);
+  const wd=await workdaysAsync(selYear,selMonth);
   const my=records.filter(r=>r.사용자===username&&r.년월===ym);
   const pend=records.filter(r=>r.상태==="대기"&&r.참석자?.includes(username)&&r.등록자!==username);
 
@@ -361,16 +403,18 @@ function updateUI(){
   document.getElementById("ent-cnt").textContent=entCnt+"회";
   document.getElementById("pay-cnt").textContent=payTot.toLocaleString()+"원";
 
-  // Month nav
+  // Month nav - 현재 연도 기준 동적 생성 (과거 2년 + 현재 + 미래 2년)
   const nav=document.getElementById("month-nav");
   nav.innerHTML="";
-  [2025,2026].forEach(y=>{
+  const curY=new Date().getFullYear();
+  const years=[curY-1,curY,curY+1,curY+2];
+  years.forEach(y=>{
     const tag=document.createElement("span");tag.className="ytag";tag.textContent=y;nav.appendChild(tag);
     [1,2,3,4,5,6,7,8,9,10,11,12].forEach(m=>{
       const btn=document.createElement("button");
       btn.className="mbtn"+(selYear===y&&selMonth===m?" on":"");
       btn.textContent=m+"월";
-      btn.onclick=()=>{selYear=y;selMonth=m;records=[];updateUI();loadRecords();};
+      btn.onclick=()=>{selYear=y;selMonth=m;records=[];loadRecords();};
       nav.appendChild(btn);
     });
   });
@@ -467,7 +511,7 @@ async function doAdd(type){
     if(type==="dinner"){document.getElementById("din-date").value="";document.getElementById("din-att").value="";}
     if(type==="entertain"){document.getElementById("ent-date").value="";document.getElementById("ent-att").value="";}
     if(type==="payment"){document.getElementById("pay-date").value="";document.getElementById("pay-amt").value="";document.getElementById("pay-memo").value="";}
-    updateUI();
+    await updateUI();
   }catch(e){console.error(e);alert("저장 실패: "+e.message);}
   setSyncing(false);
   btn.disabled=false;btn.textContent="+ 추가";
@@ -553,7 +597,6 @@ function initMainScreen(){
   document.getElementById("din-add").onclick=()=>doAdd("dinner");
   document.getElementById("ent-add").onclick=()=>doAdd("entertain");
   document.getElementById("pay-add").onclick=()=>doAdd("payment");
-  updateUI();
   loadRecords();
 }
 
