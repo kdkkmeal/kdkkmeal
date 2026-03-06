@@ -272,7 +272,6 @@ const TEAM_PW      = "kdkk";
 const USERS_DB     = "edd1fe309fe24ee3a78995b884059fa8";
 const RECORDS_DB   = "45939beb3e88416b84bbbf4af5f4e593";
 const MEAL_PRICE   = 11000;
-const HOLIDAY_API_KEY = "e01ce2b73040aa7ddb9bf365886b0a77d85dec427dcc5b9d8a5b5b05fb1e919b";
 
 // ── 공휴일 API (공공데이터포털 한국천문연구원 특일정보) ─────────────────────────────
 const HOLIDAY_API_KEY = "e01ce2b73040aa7ddb9bf365886b0a77d85dec427dcc5b9d8a5b5b05fb1e919b";
@@ -354,7 +353,7 @@ async function loadRecords(){
     const[a,b,_]=await Promise.all([
       nQ(RECORDS_DB,{and:[{property:"사용자",rich_text:{equals:username}},{property:"년월",rich_text:{equals:ym}}]}),
       nQ(RECORDS_DB,{and:[{property:"참석자",rich_text:{contains:username}},{property:"상태",select:{equals:"대기"}}]}),
-      fetchHolidays(selYear), // 공휴일 미리 캐시
+      fetchHolidays(selYear, selMonth), // 공휴일 미리 캐시
     ]);
     const seen=new Set();
     records=[...a,...b].filter(p=>{if(seen.has(p.id))return false;seen.add(p.id);return true;}).map(parse);
@@ -368,7 +367,7 @@ function setSyncing(v){document.getElementById("sync-bar").classList.toggle("hid
 // ── UI update (no DOM recreation for inputs!) ─────────────────────────────────
 async function updateUI(){
   const ym=`${selYear}-${String(selMonth).padStart(2,"0")}`;
-  const wd=await workdaysAsync(selYear,selMonth);
+  const wd=await workdays(selYear,selMonth);
   const my=records.filter(r=>r.사용자===username&&r.년월===ym);
   const pend=records.filter(r=>r.상태==="대기"&&r.참석자?.includes(username)&&r.등록자!==username);
 
@@ -403,21 +402,28 @@ async function updateUI(){
   document.getElementById("ent-cnt").textContent=entCnt+"회";
   document.getElementById("pay-cnt").textContent=payTot.toLocaleString()+"원";
 
-  // Month nav - 현재 연도 기준 동적 생성 (과거 2년 + 현재 + 미래 2년)
+  // Month nav - 현재월 기준 앞뒤 2달
   const nav=document.getElementById("month-nav");
   nav.innerHTML="";
-  const curY=new Date().getFullYear();
-  const years=[curY-1,curY,curY+1,curY+2];
-  years.forEach(y=>{
-    const tag=document.createElement("span");tag.className="ytag";tag.textContent=y;nav.appendChild(tag);
-    [1,2,3,4,5,6,7,8,9,10,11,12].forEach(m=>{
-      const btn=document.createElement("button");
-      btn.className="mbtn"+(selYear===y&&selMonth===m?" on":"");
-      btn.textContent=m+"월";
-      btn.onclick=()=>{selYear=y;selMonth=m;records=[];loadRecords();};
-      nav.appendChild(btn);
-    });
+  const now=new Date();
+  const months=[];
+  for(let i=-2;i<=2;i++){
+    const d=new Date(now.getFullYear(),now.getMonth()+i,1);
+    months.push({y:d.getFullYear(),m:d.getMonth()+1});
+  }
+  let lastY=null;
+  months.forEach(({y,m})=>{
+    if(y!==lastY){
+      const tag=document.createElement("span");tag.className="ytag";tag.textContent=y;nav.appendChild(tag);
+      lastY=y;
+    }
+    const btn=document.createElement("button");
+    btn.className="mbtn"+(selYear===y&&selMonth===m?" on":"");
+    btn.textContent=m+"월";
+    btn.onclick=()=>{selYear=y;selMonth=m;records=[];updateUI();loadRecords();};
+    nav.appendChild(btn);
   });
+
 
   // Invites
   const ia=document.getElementById("invites-area");ia.innerHTML="";
@@ -597,6 +603,7 @@ function initMainScreen(){
   document.getElementById("din-add").onclick=()=>doAdd("dinner");
   document.getElementById("ent-add").onclick=()=>doAdd("entertain");
   document.getElementById("pay-add").onclick=()=>doAdd("payment");
+  updateUI();
   loadRecords();
 }
 
