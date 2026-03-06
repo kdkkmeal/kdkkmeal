@@ -766,33 +766,31 @@ async function doInvite(rec, accept) {
       await nUpdate(rec.id, {"상태": pSel("확인")});
 
     } else {
-      // 거절: 본인 레코드 거절 처리 + 같은 날짜/유형의 다른 참석자 레코드에서 이름 제거
-      records = records.map(function(r) {
-        return r.id === rec.id ? Object.assign({}, r, {상태: "거절"}) : r;
-      });
-      await nUpdate(rec.id, {"상태": pSel("거절")});
+      // 거절: 본인 레코드 삭제
+      records = records.filter(function(r) { return r.id !== rec.id; });
+      await nDelete(rec.id);
 
-      // 같은 그룹(등록자+날짜+유형이 같은) 레코드들에서 username 제거
-      const sameGroup = records.filter(function(r) {
-        return r.id !== rec.id
-          && r.등록자 === rec.등록자
-          && r.날짜   === rec.날짜
-          && r.유형   === rec.유형;
-      });
-      for (var i = 0; i < sameGroup.length; i++) {
-        const r = sameGroup[i];
-        // 참석자 문자열에서 username 제거
-        const newAtt = (r.참석자 || "")
+      // 노션에서 같은 그룹(등록자+날짜+유형) 레코드 직접 조회 후 참석자에서 본인 이름 제거
+      const groupRecs = await nQuery(RECORDS_DB, {and: [
+        {property: "등록자", rich_text: {equals: rec.등록자}},
+        {property: "날짜",   date:       {equals: rec.날짜}},
+        {property: "유형",   select:     {equals: rec.유형}}
+      ]});
+      for (var i = 0; i < groupRecs.length; i++) {
+        const gr = groupRecs[i];
+        const curAtt = gr.properties["참석자"]?.rich_text?.[0]?.plain_text || "";
+        const newAtt = curAtt
           .split(",")
           .map(function(s) { return s.trim(); })
-          .filter(function(s) { return s !== username; })
+          .filter(function(s) { return s && s !== username; })
           .join(", ");
-        // 로컬 상태 업데이트
-        records = records.map(function(x) {
-          return x.id === r.id ? Object.assign({}, x, {참석자: newAtt}) : x;
-        });
-        // 노션 업데이트
-        await nUpdate(r.id, {"참석자": pText(newAtt)});
+        if (newAtt !== curAtt) {
+          // 로컬 records에도 반영
+          records = records.map(function(x) {
+            return x.id === gr.id ? Object.assign({}, x, {참석자: newAtt}) : x;
+          });
+          await nUpdate(gr.id, {"참석자": pText(newAtt)});
+        }
       }
     }
   } catch(e) { console.error(e); }
