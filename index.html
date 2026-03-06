@@ -250,7 +250,7 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
       <div class="shead"><div class="stitle">💳 결제 내역 <span id="pay-cnt" class="scnt">0원</span></div></div>
       <div class="frow">
         <div class="fg"><div class="flbl">날짜</div><input id="pay-date" class="fi" type="date"/></div>
-        <div class="fg"><div class="flbl">금액 (만원)</div><input id="pay-amt" class="fi" type="number" placeholder="예: 3.5" step="0.1"/></div>
+        <div class="fg"><div class="flbl">금액 (원)</div><input id="pay-amt" class="fi" type="number" placeholder="예: 35000" step="100"/></div>
         <div class="fg w"><div class="flbl">메모 (선택)</div><input id="pay-memo" class="fi" type="text" placeholder="식당명 등"/></div>
         <button id="pay-add" class="addbtn">+ 추가</button>
       </div>
@@ -280,8 +280,10 @@ function workdays(y,m){const r=[],d=new Date(y,m-1,1);while(d.getMonth()===m-1){
 
 async function nReq(method,path,body){
   const url=`https://api.notion.com/v1${path}`;
-  const res=await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,{method,headers:{"Content-Type":"application/json","Notion-Version":"2022-06-28","Authorization":`Bearer ${NOTION_TOKEN}`},...(body?{body:JSON.stringify(body)}:{})});
-  const txt=await res.text();if(!res.ok)throw new Error(txt);return JSON.parse(txt);
+  // corsproxy.io 사용 (allorigins 대체)
+  const proxied=`https://corsproxy.io/?url=${encodeURIComponent(url)}`;
+  const res=await fetch(proxied,{method,headers:{"Content-Type":"application/json","Notion-Version":"2022-06-28","Authorization":`Bearer ${NOTION_TOKEN}`},...(body?{body:JSON.stringify(body)}:{})});
+  const txt=await res.text();if(!res.ok)throw new Error(`HTTP ${res.status}: ${txt}`);return JSON.parse(txt);
 }
 const nQ=(db,f)=>nReq("POST",`/databases/${db}/query`,f?{filter:f}:{}).then(r=>r.results||[]);
 const nC=(db,p)=>nReq("POST","/pages",{parent:{database_id:db},properties:p});
@@ -289,7 +291,7 @@ const nU=(id,p)=>nReq("PATCH",`/pages/${id}`,{properties:p});
 const nD=(id)=>nReq("PATCH",`/pages/${id}`,{archived:true});
 const pT=v=>({title:[{text:{content:String(v||"")}}]});
 const pR=v=>({rich_text:[{text:{content:String(v||"")}}]});
-const pDt=v=>({date:{start:v}});
+const pDt=v=>({date:{start:v,end:null}});
 const pN=v=>({number:Number(v)||0});
 const pS=v=>({select:{name:v}});
 function parse(pg){const p=pg.properties||{};const gt=k=>p[k]?.rich_text?.[0]?.plain_text||p[k]?.title?.[0]?.plain_text||"";return{id:pg.id,사용자:gt("사용자"),년월:gt("년월"),유형:p["유형"]?.select?.name||"",날짜:p["날짜"]?.date?.start||"",참석자:gt("참석자"),금액:p["금액"]?.number||0,상태:p["상태"]?.select?.name||"",등록자:gt("등록자"),메모:gt("메모")};}
@@ -425,7 +427,7 @@ async function doAdd(type){
   if(type==="annual")      {date=document.getElementById("ann-date").value;}
   else if(type==="dinner") {date=document.getElementById("din-date").value;att=document.getElementById("din-att").value.trim();if(att)status="대기";}
   else if(type==="entertain"){date=document.getElementById("ent-date").value;att=document.getElementById("ent-att").value.trim();if(att)status="대기";}
-  else{date=document.getElementById("pay-date").value;amt=parseFloat(document.getElementById("pay-amt").value)*10000;memo=document.getElementById("pay-memo").value;}
+  else{date=document.getElementById("pay-date").value;amt=parseFloat(document.getElementById("pay-amt").value)||0;memo=document.getElementById("pay-memo").value;}
 
   if(!date)return;
   const btn=document.getElementById(type==="annual"?"ann-add":type==="dinner"?"din-add":type==="entertain"?"ent-add":"pay-add");
@@ -440,7 +442,7 @@ async function doAdd(type){
     if(type==="entertain"){document.getElementById("ent-date").value="";document.getElementById("ent-att").value="";}
     if(type==="payment"){document.getElementById("pay-date").value="";document.getElementById("pay-amt").value="";document.getElementById("pay-memo").value="";}
     updateUI();
-  }catch(e){console.error(e);}
+  }catch(e){console.error(e);alert("저장 실패: "+e.message);}
   setSyncing(false);
   btn.disabled=false;btn.textContent="+ 추가";
 }
