@@ -659,10 +659,22 @@ function renderList(id, recs, infoHtml) {
     info.className = "rinfo"; info.innerHTML = infoHtml(r);
     const act  = document.createElement("div");
     act.className = "ract";
-    const del  = document.createElement("button");
-    del.className = "bsm bdel"; del.textContent = "삭제";
-    del.onclick = (function(rid) { return function() { doDelete(rid); }; })(r.id);
-    act.appendChild(del);
+
+    // 삭제 버튼 표시 조건:
+    // - 연차/결제: 항상 표시 (본인 레코드만 있음)
+    // - 회식/접대: 등록자(본인이 만든 것)이거나 이미 확인한 경우에만 표시
+    //             타인이 초대한 것이고 아직 대기 상태면 숨김
+    const isGuestPending = (r.유형 === "회식" || r.유형 === "접대")
+      && r.등록자 !== username
+      && r.상태 === "대기";
+
+    if (!isGuestPending) {
+      const del = document.createElement("button");
+      del.className = "bsm bdel"; del.textContent = "삭제";
+      del.onclick = (function(rid) { return function() { doDelete(rid); }; })(r.id);
+      act.appendChild(del);
+    }
+
     row.appendChild(date); row.appendChild(info); row.appendChild(act);
     el.appendChild(row);
   });
