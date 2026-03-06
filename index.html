@@ -501,23 +501,15 @@ async function loadRecords() {
   const ym = selYear + "-" + String(selMonth).padStart(2, "0");
   document.getElementById("loading-bar").classList.remove("hidden");
   try {
+    // 사용자=본인인 레코드만 가져옴 (참석자로 생성된 레코드 포함)
     const results = await Promise.all([
       nQuery(RECORDS_DB, {and: [
         {property: "사용자", rich_text: {equals: username}},
         {property: "년월",   rich_text: {equals: ym}}
       ]}),
-      nQuery(RECORDS_DB, {and: [
-        {property: "참석자", rich_text: {contains: username}},
-        {property: "상태",   select:    {equals: "대기"}}
-      ]}),
       fetchHolidays(selYear, selMonth)
     ]);
-    const seen = new Set();
-    records = results[0].concat(results[1]).filter(function(pg) {
-      if (seen.has(pg.id)) return false;
-      seen.add(pg.id);
-      return true;
-    }).map(parseRecord);
+    records = results[0].map(parseRecord);
   } catch(e) {
     console.error("loadRecords 오류:", e);
   }
@@ -537,8 +529,9 @@ async function updateUI() {
   const wd = await getWorkdays(selYear, selMonth);
 
   const my   = records.filter(function(r) { return r.사용자 === username && r.년월 === ym; });
+  // 초대 알림: 본인 앞으로 온 레코드 중 대기 상태인 것 (등록자가 본인이 아닌 것)
   const pend = records.filter(function(r) {
-    return r.상태 === "대기" && r.참석자 && r.참석자.includes(username) && r.등록자 !== username;
+    return r.상태 === "대기" && r.등록자 !== username;
   });
 
   const annRecs = my.filter(function(r) { return r.유형 === "연차"; });
