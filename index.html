@@ -24,8 +24,6 @@ html,body{height:100%;overflow-x:hidden}
 body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t1);
   padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .hidden{display:none!important}
-
-/* ── AUTH ── */
 .aw{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:20px;
   background:radial-gradient(ellipse 70% 50% at 50% -5%,rgba(59,130,246,.12),transparent 65%),var(--bg)}
 .ac{width:100%;max-width:380px;background:var(--s1);border:1px solid var(--b2);border-radius:24px;padding:40px 32px}
@@ -34,8 +32,8 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 .as{font-size:13px;color:var(--t3);text-align:center;margin:5px 0 28px}
 .al{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:7px}
 .ai{width:100%;padding:14px 16px;border-radius:12px;background:var(--s2);border:1px solid var(--b2);
-  color:var(--t1);font-family:inherit;font-size:16px;outline:none;
-  transition:border .2s,box-shadow .2s;margin-bottom:12px;-webkit-appearance:none;display:block}
+  color:var(--t1);font-family:inherit;font-size:16px;outline:none;transition:border .2s,box-shadow .2s;
+  margin-bottom:12px;-webkit-appearance:none;display:block}
 .ai:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
 .ai::placeholder{color:var(--t4)}
 .aac{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#1a1d27;
@@ -44,16 +42,13 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 .aaci:hover{background:rgba(59,130,246,.2);color:var(--acc)}
 .ab{width:100%;padding:15px;border-radius:12px;
   background:linear-gradient(135deg,var(--acc),var(--acc2));border:none;
-  color:#fff;font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;
-  margin-top:8px;display:block}
+  color:#fff;font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;margin-top:8px;display:block}
 .ab:active{opacity:.85}
 .ab:disabled{opacity:.4;cursor:not-allowed}
 .abk{width:100%;padding:12px;background:none;border:none;color:var(--t3);
   font-family:inherit;font-size:13px;cursor:pointer;margin-top:6px;display:block}
 .aerr{color:var(--red);font-size:13px;text-align:center;margin-top:8px;min-height:20px}
 .aiwrap{position:relative}
-
-/* ── HEADER ── */
 .hdr{position:sticky;top:0;z-index:40;background:rgba(10,11,15,.92);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid var(--b1);padding:0 16px;height:52px;
@@ -64,8 +59,6 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 .hbtn{background:var(--s2);border:1px solid var(--b1);border-radius:8px;
   padding:6px 12px;font-size:11px;color:var(--t2);cursor:pointer;font-family:inherit}
 .hbtn:active{opacity:.7}
-
-/* ── MAIN ── */
 .main{max-width:860px;margin:0 auto;padding:16px 12px 80px}
 .mnav{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:16px}
 .ytag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--acc);
@@ -73,10 +66,7 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 .mbtn{height:36px;min-width:36px;padding:0 10px;border-radius:8px;
   font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;
   border:1px solid var(--b1);background:var(--s1);color:var(--t2)}
-.mbtn.on{background:linear-gradient(135deg,var(--acc),var(--acc2));border-color:transparent;
-  color:#fff;font-weight:700}
-
-/* ── CARDS ── */
+.mbtn.on{background:linear-gradient(135deg,var(--acc),var(--acc2));border-color:transparent;color:#fff;font-weight:700}
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
 @media(min-width:580px){.cards{grid-template-columns:repeat(4,1fr)}}
 .card{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:14px 15px}
@@ -89,21 +79,15 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 .ptrack{height:4px;background:rgba(255,255,255,.07);border-radius:99px;margin-top:10px;overflow:hidden}
 .pfill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .5s}
 .pfill.warn{background:linear-gradient(90deg,var(--org),var(--red))}
-
-/* ── NOTIF ── */
 .notif{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.18);border-radius:12px;
   padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .ntxt{font-size:12px;color:#bfdbfe;flex:1;line-height:1.5}
 .nact{display:flex;gap:5px;flex-shrink:0}
-
-/* ── SECTION ── */
 .sec{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:14px;margin-bottom:10px}
 .shead{display:flex;align-items:center;margin-bottom:11px}
 .stitle{font-size:13px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:7px}
 .scnt{background:rgba(59,130,246,.14);color:var(--acc);border-radius:99px;
   padding:2px 9px;font-size:11px;font-weight:700;font-family:'Geist Mono',monospace}
-
-/* ── FORM ── */
 .frow{display:flex;flex-wrap:wrap;gap:6px;align-items:flex-end}
 .fg{display:flex;flex-direction:column;gap:4px;flex:1;min-width:100px}
 .fg.w{flex:2}
@@ -119,8 +103,6 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
   display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap}
 .addbtn:active{opacity:.8}
 .addbtn:disabled{opacity:.4;cursor:not-allowed}
-
-/* ── RECORDS ── */
 .rlist{display:flex;flex-direction:column;gap:5px;margin-top:8px}
 .ritem{display:flex;align-items:center;gap:8px;padding:10px 12px;
   background:var(--s2);border:1px solid var(--b1);border-radius:9px}
@@ -130,8 +112,6 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 .ramt{font-size:12px;font-weight:700;color:var(--t1);font-family:'Geist Mono',monospace;min-width:72px;text-align:right}
 .ract{display:flex;gap:5px;align-items:center;flex-shrink:0}
 .empty{text-align:center;padding:20px;font-size:12px;color:var(--t3)}
-
-/* ── TAGS ── */
 .tag{border-radius:4px;padding:2px 7px;font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;flex-shrink:0}
 .ty{background:rgba(234,179,8,.13);color:var(--yel)}
 .td{background:rgba(249,115,22,.13);color:var(--org)}
@@ -140,8 +120,6 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 .tpnd{background:rgba(100,116,139,.13);color:#94a3b8}
 .tok{background:rgba(34,197,94,.13);color:var(--grn)}
 .tno{background:rgba(239,68,68,.13);color:var(--red)}
-
-/* ── BUTTONS ── */
 .bsm{padding:6px 11px;border-radius:7px;font-size:11px;font-weight:500;cursor:pointer;
   border:none;font-family:inherit;min-height:32px;flex-shrink:0}
 .bdel{background:rgba(239,68,68,.1);color:var(--red)}
@@ -150,25 +128,18 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 .bok:active{background:rgba(34,197,94,.25)}
 .bno{background:rgba(239,68,68,.1);color:var(--red)}
 .bno:active{background:rgba(239,68,68,.25)}
-
-/* ── MISC ── */
 .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;
   border-radius:50%;animation:sp .6s linear infinite;display:inline-block;flex-shrink:0}
 @keyframes sp{to{transform:rotate(360deg)}}
 .spin.b{border-top-color:var(--acc)}
-.loading{display:flex;align-items:center;justify-content:center;gap:9px;
-  padding:28px;color:var(--t3);font-size:13px}
+.loading{display:flex;align-items:center;justify-content:center;gap:9px;padding:28px;color:var(--t3);font-size:13px}
 .syncbar{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t3);padding:4px 0 12px}
-.sdot{width:6px;height:6px;border-radius:50%;background:var(--grn);
-  box-shadow:0 0 6px var(--grn);flex-shrink:0;animation:pulse 1.5s infinite}
+.sdot{width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 6px var(--grn);flex-shrink:0;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-
-/* ── INSTALL BANNER ── */
-.ib{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,16px));left:50%;
-  transform:translateX(-50%);background:linear-gradient(135deg,#1e2130,#252940);
-  border:1px solid rgba(59,130,246,.3);border-radius:16px;padding:14px 18px;
-  display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,.5);
-  z-index:100;max-width:340px;width:calc(100% - 32px)}
+.ib{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,16px));left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,#1e2130,#252940);border:1px solid rgba(59,130,246,.3);
+  border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,.5);z-index:100;max-width:340px;width:calc(100% - 32px)}
 .ib-icon{font-size:26px;flex-shrink:0}
 .ib-text{flex:1}
 .ib-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
@@ -182,7 +153,6 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 </head>
 <body>
 
-<!-- 비밀번호 화면 -->
 <div id="screen-pw" class="aw hidden">
   <div class="ac">
     <div class="ae">🍱</div>
@@ -195,7 +165,6 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
   </div>
 </div>
 
-<!-- 이름 선택 화면 -->
 <div id="screen-name" class="aw hidden">
   <div class="ac">
     <div class="ae">👤</div>
@@ -212,7 +181,6 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
   </div>
 </div>
 
-<!-- 메인 화면 -->
 <div id="screen-main" class="hidden">
   <div class="hdr">
     <span class="htitle">🍱 식대 계산기</span>
@@ -224,7 +192,7 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
   <div class="main">
     <div id="month-nav" class="mnav"></div>
     <div id="sync-bar" class="syncbar hidden">
-      <div class="sdot"></div><div class="spin b"></div>노션에 저장 중...
+      <div class="sdot"></div><div class="spin b"></div>저장 중...
     </div>
     <div id="invites-area"></div>
     <div class="cards">
@@ -249,81 +217,39 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
         <div class="ptrack"><div id="c-rate-bar" class="pfill" style="width:0%"></div></div>
       </div>
     </div>
-    <div id="loading-bar" class="loading hidden">
-      <div class="spin b"></div>노션에서 데이터 불러오는 중...
-    </div>
-
-    <!-- 연차 -->
+    <div id="loading-bar" class="loading hidden"><div class="spin b"></div>불러오는 중...</div>
     <div class="sec">
-      <div class="shead">
-        <div class="stitle">🌴 연차 <span id="ann-cnt" class="scnt">0일</span></div>
-      </div>
+      <div class="shead"><div class="stitle">🌴 연차 <span id="ann-cnt" class="scnt">0일</span></div></div>
       <div class="frow">
-        <div class="fg">
-          <div class="flbl">날짜</div>
-          <input id="ann-date" class="fi" type="date"/>
-        </div>
+        <div class="fg"><div class="flbl">날짜</div><input id="ann-date" class="fi" type="date"/></div>
         <button id="ann-add" class="addbtn">+ 추가</button>
       </div>
       <div id="ann-list" class="rlist"></div>
     </div>
-
-    <!-- 회식 -->
     <div class="sec">
-      <div class="shead">
-        <div class="stitle">🍻 회식 <span id="din-cnt" class="scnt">0회</span></div>
-      </div>
+      <div class="shead"><div class="stitle">🍻 회식 <span id="din-cnt" class="scnt">0회</span></div></div>
       <div class="frow">
-        <div class="fg">
-          <div class="flbl">날짜</div>
-          <input id="din-date" class="fi" type="date"/>
-        </div>
-        <div class="fg w">
-          <div class="flbl">참석자 (쉼표 구분, 선택)</div>
-          <input id="din-att" class="fi" type="text" placeholder="예: 이영희, 박민준"/>
-        </div>
+        <div class="fg"><div class="flbl">날짜</div><input id="din-date" class="fi" type="date"/></div>
+        <div class="fg w"><div class="flbl">참석자 (쉼표 구분, 선택)</div><input id="din-att" class="fi" type="text" placeholder="예: 이영희, 박민준"/></div>
         <button id="din-add" class="addbtn">+ 추가</button>
       </div>
       <div id="din-list" class="rlist"></div>
     </div>
-
-    <!-- 접대 -->
     <div class="sec">
-      <div class="shead">
-        <div class="stitle">🤝 접대 <span id="ent-cnt" class="scnt">0회</span></div>
-      </div>
+      <div class="shead"><div class="stitle">🤝 접대 <span id="ent-cnt" class="scnt">0회</span></div></div>
       <div class="frow">
-        <div class="fg">
-          <div class="flbl">날짜</div>
-          <input id="ent-date" class="fi" type="date"/>
-        </div>
-        <div class="fg w">
-          <div class="flbl">참석자 (쉼표 구분, 선택)</div>
-          <input id="ent-att" class="fi" type="text" placeholder="예: 거래처 김대리"/>
-        </div>
+        <div class="fg"><div class="flbl">날짜</div><input id="ent-date" class="fi" type="date"/></div>
+        <div class="fg w"><div class="flbl">참석자 (쉼표 구분, 선택)</div><input id="ent-att" class="fi" type="text" placeholder="예: 거래처 김대리"/></div>
         <button id="ent-add" class="addbtn">+ 추가</button>
       </div>
       <div id="ent-list" class="rlist"></div>
     </div>
-
-    <!-- 결제 -->
     <div class="sec">
-      <div class="shead">
-        <div class="stitle">💳 결제 내역 <span id="pay-cnt" class="scnt">0원</span></div>
-      </div>
+      <div class="shead"><div class="stitle">💳 결제 내역 <span id="pay-cnt" class="scnt">0원</span></div></div>
       <div class="frow">
-        <div class="fg">
-          <div class="flbl">날짜</div>
-          <input id="pay-date" class="fi" type="date"/>
-        </div>
-        <div class="fg">
-          <div class="flbl">금액 (원)</div>
-          <input id="pay-amt" class="fi" type="number" placeholder="예: 35000" step="100"/>
-        </div>
-        <div class="fg w">
-          <div class="flbl">메모 (선택)</div>
-          <input id="pay-memo" class="fi" type="text" placeholder="식당명 등"/>
-        </div>
+        <div class="fg"><div class="flbl">날짜</div><input id="pay-date" class="fi" type="date"/></div>
+        <div class="fg"><div class="flbl">금액 (원)</div><input id="pay-amt" class="fi" type="number" placeholder="예: 35000" step="100"/></div>
+        <div class="fg w"><div class="flbl">메모 (선택)</div><input id="pay-memo" class="fi" type="text" placeholder="식당명 등"/></div>
         <button id="pay-add" class="addbtn">+ 추가</button>
       </div>
       <div id="pay-list" class="rlist"></div>
@@ -331,13 +257,9 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
   </div>
 </div>
 
-<!-- 설치 배너 -->
 <div id="ib" class="ib hidden">
   <div class="ib-icon">🍱</div>
-  <div class="ib-text">
-    <div class="ib-title">홈 화면에 추가하기</div>
-    <div class="ib-sub">앱처럼 빠르게 실행할 수 있어요</div>
-  </div>
+  <div class="ib-text"><div class="ib-title">홈 화면에 추가하기</div><div class="ib-sub">앱처럼 빠르게 실행할 수 있어요</div></div>
   <div class="ib-btns">
     <button id="ib-ok" class="ib-ok">설치</button>
     <button id="ib-no" class="ib-no">나중에</button>
@@ -348,76 +270,66 @@ body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--t
 // ══════════════════════════════════════════════════════════
 // 설정
 // ══════════════════════════════════════════════════════════
-const NOTION_TOKEN    = "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";
-const TEAM_PW         = "kdkk";
-const USERS_DB        = "edd1fe309fe24ee3a78995b884059fa8";
-const RECORDS_DB      = "45939beb3e88416b84bbbf4af5f4e593";
-const MEAL_PRICE      = 11000;
-const HOLIDAY_API_KEY = "e01ce2b73040aa7ddb9bf365886b0a77d85dec427dcc5b9d8a5b5b05fb1e919b";
+var NOTION_TOKEN    = "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";
+var TEAM_PW         = "kdkk";
+var USERS_DB        = "edd1fe309fe24ee3a78995b884059fa8";
+var RECORDS_DB      = "45939beb3e88416b84bbbf4af5f4e593";
+var MEAL_PRICE      = 11000;
+var HOLIDAY_API_KEY = "e01ce2b73040aa7ddb9bf365886b0a77d85dec427dcc5b9d8a5b5b05fb1e919b";
 
 // ══════════════════════════════════════════════════════════
-// 공휴일 API (공공데이터포털 한국천문연구원 특일정보)
+// 공휴일 (캐시 + API + fallback)
 // ══════════════════════════════════════════════════════════
-const holidayCache = {}; // "YYYY-M" => Set
+var holidayCache = {}; // "YYYY-M" → Set
+
+var FALLBACK_HOLIDAYS = new Set([
+  "2025-01-01","2025-01-28","2025-01-29","2025-01-30","2025-03-01",
+  "2025-05-05","2025-05-06","2025-05-15","2025-06-06","2025-08-15",
+  "2025-10-03","2025-10-06","2025-10-07","2025-10-08","2025-10-09","2025-11-17","2025-12-25",
+  "2026-01-01","2026-02-16","2026-02-17","2026-02-18","2026-03-01",
+  "2026-05-05","2026-05-25","2026-06-06","2026-08-17",
+  "2026-09-24","2026-09-25","2026-09-26","2026-10-03","2026-10-09","2026-12-25"
+]);
 
 async function fetchHolidays(year, month) {
-  const key = year + "-" + month;
-  if (holidayCache[key] !== undefined) return holidayCache[key];
-  const set = new Set();
+  var key = year + "-" + month;
+  if (holidayCache[key] !== undefined) return;
+  var set = new Set();
   holidayCache[key] = set;
   try {
-    const url = "https://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo"
+    var url = "https://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo"
       + "?solYear=" + year
-      + "&solMonth=" + String(month).padStart(2, "0")
-      + "&numOfRows=20&_type=json"
-      + "&ServiceKey=" + HOLIDAY_API_KEY;
-    // 프록시 순서대로 시도
-    let res = null;
-    const hProxies = [
-      "https://corsproxy.io/?url=" + encodeURIComponent(url),
-      "https://api.allorigins.win/raw?url=" + encodeURIComponent(url)
-    ];
-    for (var pi = 0; pi < hProxies.length; pi++) {
-      try { res = await fetch(hProxies[pi]); if (res.ok) break; } catch(e) {}
-    }
-    if (!res || !res.ok) throw new Error("공휴일 API 실패");
-    const data = await res.json();
-    const items = data?.response?.body?.items?.item;
+      + "&solMonth=" + String(month).padStart(2,"0")
+      + "&numOfRows=20&_type=json&ServiceKey=" + HOLIDAY_API_KEY;
+    var res = await nFetch(url);
+    var items = res?.response?.body?.items?.item;
     if (items) {
-      const list = Array.isArray(items) ? items : [items];
+      var list = Array.isArray(items) ? items : [items];
       list.forEach(function(item) {
         if (item.isHoliday === "Y") {
-          const d = String(item.locdate);
+          var d = String(item.locdate);
           set.add(d.slice(0,4) + "-" + d.slice(4,6) + "-" + d.slice(6,8));
         }
       });
     }
   } catch(e) {
-    console.warn("공휴일 API 실패:", e);
-    // fallback
-    const fallback = ["2025-01-01","2025-01-28","2025-01-29","2025-01-30","2025-03-01",
-      "2025-05-05","2025-05-06","2025-05-15","2025-06-06","2025-08-15",
-      "2025-10-03","2025-10-06","2025-10-07","2025-10-08","2025-10-09","2025-11-17","2025-12-25",
-      "2026-01-01","2026-02-16","2026-02-17","2026-02-18","2026-03-01",
-      "2026-05-05","2026-05-25","2026-06-06","2026-08-17",
-      "2026-09-24","2026-09-25","2026-09-26","2026-10-03","2026-10-09","2026-12-25"];
-    fallback.forEach(function(d) {
-      const y = parseInt(d.slice(0,4)), m = parseInt(d.slice(5,7));
+    // API 실패 시 fallback 사용
+    FALLBACK_HOLIDAYS.forEach(function(d) {
+      var y = parseInt(d.slice(0,4)), m = parseInt(d.slice(5,7));
       if (y === year && m === month) set.add(d);
     });
   }
-  return set;
 }
 
-async function getWorkdays(year, month) {
-  const holidays = await fetchHolidays(year, month);
-  const result = [];
-  const d = new Date(year, month - 1, 1);
+// 공휴일 캐시 기반 동기 계산 (updateUI에서 사용)
+function calcWorkdays(year, month) {
+  var key = year + "-" + month;
+  var holidays = holidayCache[key] || FALLBACK_HOLIDAYS;
+  var result = [];
+  var d = new Date(year, month - 1, 1);
   while (d.getMonth() === month - 1) {
-    const w = d.getDay();
-    const s = d.getFullYear() + "-"
-      + String(d.getMonth()+1).padStart(2,"0") + "-"
-      + String(d.getDate()).padStart(2,"0");
+    var w = d.getDay();
+    var s = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
     if (w !== 0 && w !== 6 && !holidays.has(s)) result.push(s);
     d.setDate(d.getDate() + 1);
   }
@@ -425,11 +337,35 @@ async function getWorkdays(year, month) {
 }
 
 // ══════════════════════════════════════════════════════════
-// Notion API
+// Notion API (프록시 자동 선택)
 // ══════════════════════════════════════════════════════════
+var _bestProxy = 0;
+var PROXIES = [
+  function(u){ return "https://corsproxy.io/?url=" + encodeURIComponent(u); },
+  function(u){ return "https://api.allorigins.win/raw?url=" + encodeURIComponent(u); },
+  function(u){ return "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u); }
+];
+
+// 공통 fetch (프록시 자동 선택, 성공한 프록시 기억)
+async function nFetch(url, opts) {
+  var order = [];
+  for (var i = 0; i < PROXIES.length; i++) order.push((_bestProxy + i) % PROXIES.length);
+  var lastErr;
+  for (var j = 0; j < order.length; j++) {
+    try {
+      var res = await fetch(PROXIES[order[j]](url), opts || {});
+      var txt = await res.text();
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      _bestProxy = order[j];
+      return JSON.parse(txt);
+    } catch(e) { lastErr = e; }
+  }
+  throw lastErr;
+}
+
 async function nReq(method, path, body) {
-  const url = "https://api.notion.com/v1" + path;
-  const opts = {
+  var url = "https://api.notion.com/v1" + path;
+  var opts = {
     method: method,
     headers: {
       "Content-Type": "application/json",
@@ -438,52 +374,26 @@ async function nReq(method, path, body) {
     }
   };
   if (body) opts.body = JSON.stringify(body);
-
-  // 프록시를 순서대로 시도
-  const proxies = [
-    "https://corsproxy.io/?url=" + encodeURIComponent(url),
-    "https://api.allorigins.win/raw?url=" + encodeURIComponent(url),
-    "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(url)
-  ];
-
-  for (var i = 0; i < proxies.length; i++) {
-    try {
-      const res = await fetch(proxies[i], opts);
-      const txt = await res.text();
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      return JSON.parse(txt);
-    } catch(e) {
-      console.warn("프록시 " + i + " 실패, 다음 시도:", e.message);
-      if (i === proxies.length - 1) throw e;
-    }
-  }
+  return nFetch(url, opts);
 }
 
 function nQuery(db, filter) {
-  return nReq("POST", "/databases/" + db + "/query", filter ? {filter: filter} : {})
-    .then(function(r) { return r.results || []; });
+  return nReq("POST", "/databases/" + db + "/query", filter ? {filter:filter} : {})
+    .then(function(r){ return r.results || []; });
 }
-function nCreate(db, props) {
-  return nReq("POST", "/pages", {parent: {database_id: db}, properties: props});
-}
-function nUpdate(id, props) {
-  return nReq("PATCH", "/pages/" + id, {properties: props});
-}
-function nDelete(id) {
-  return nReq("PATCH", "/pages/" + id, {archived: true});
-}
+function nCreate(db, props) { return nReq("POST", "/pages", {parent:{database_id:db}, properties:props}); }
+function nUpdate(id, props) { return nReq("PATCH", "/pages/" + id, {properties:props}); }
+function nDelete(id)        { return nReq("PATCH", "/pages/" + id, {archived:true}); }
 
-function pTitle(v)  { return {title: [{text: {content: String(v || "")}}]}; }
-function pText(v)   { return {rich_text: [{text: {content: String(v || "")}}]}; }
-function pDate(v)   { return {date: {start: v, end: null}}; }
-function pNum(v)    { return {number: Number(v) || 0}; }
-function pSel(v)    { return {select: {name: v}}; }
+function pTitle(v) { return {title:[{text:{content:String(v||"")}}]}; }
+function pText(v)  { return {rich_text:[{text:{content:String(v||"")}}]}; }
+function pDate(v)  { return {date:{start:v,end:null}}; }
+function pNum(v)   { return {number:Number(v)||0}; }
+function pSel(v)   { return {select:{name:v}}; }
 
 function parseRecord(pg) {
-  const p = pg.properties || {};
-  function gt(k) {
-    return (p[k]?.rich_text?.[0]?.plain_text) || (p[k]?.title?.[0]?.plain_text) || "";
-  }
+  var p = pg.properties || {};
+  function gt(k){ return p[k]?.rich_text?.[0]?.plain_text || p[k]?.title?.[0]?.plain_text || ""; }
   return {
     id:     pg.id,
     사용자: gt("사용자"),
@@ -507,30 +417,30 @@ var records    = [];
 var selYear    = new Date().getFullYear();
 var selMonth   = new Date().getMonth() + 1;
 
-// ══════════════════════════════════════════════════════════
-// 화면 전환
-// ══════════════════════════════════════════════════════════
 function showScreen(id) {
-  ["screen-pw", "screen-name", "screen-main"].forEach(function(s) {
+  ["screen-pw","screen-name","screen-main"].forEach(function(s){
     document.getElementById(s).classList.add("hidden");
   });
   document.getElementById(id).classList.remove("hidden");
 }
 
+function setSyncing(v) {
+  document.getElementById("sync-bar").classList.toggle("hidden", !v);
+}
+
 // ══════════════════════════════════════════════════════════
-// 데이터 로드
+// 데이터 로드 (노션 + 공휴일 병렬)
 // ══════════════════════════════════════════════════════════
 async function loadRecords() {
-  const ym = selYear + "-" + String(selMonth).padStart(2, "0");
+  var ym = selYear + "-" + String(selMonth).padStart(2,"0");
   document.getElementById("loading-bar").classList.remove("hidden");
   try {
-    // 사용자=본인인 레코드만 가져옴 (참석자로 생성된 레코드 포함)
-    const results = await Promise.all([
-      nQuery(RECORDS_DB, {and: [
-        {property: "사용자", rich_text: {equals: username}},
-        {property: "년월",   rich_text: {equals: ym}}
+    var results = await Promise.all([
+      nQuery(RECORDS_DB, {and:[
+        {property:"사용자", rich_text:{equals:username}},
+        {property:"년월",   rich_text:{equals:ym}}
       ]}),
-      fetchHolidays(selYear, selMonth)
+      fetchHolidays(selYear, selMonth) // 공휴일 캐시 채우기
     ]);
     records = results[0].map(parseRecord);
   } catch(e) {
@@ -540,164 +450,126 @@ async function loadRecords() {
   updateUI();
 }
 
-function setSyncing(v) {
-  document.getElementById("sync-bar").classList.toggle("hidden", !v);
-}
-
 // ══════════════════════════════════════════════════════════
-// UI 업데이트
+// UI 업데이트 (동기 - 공휴일은 캐시에서 가져옴)
 // ══════════════════════════════════════════════════════════
-async function updateUI() {
-  const ym = selYear + "-" + String(selMonth).padStart(2, "0");
-  const wd = await getWorkdays(selYear, selMonth);
+function updateUI() {
+  var ym = selYear + "-" + String(selMonth).padStart(2,"0");
+  var wd = calcWorkdays(selYear, selMonth); // 동기 계산
 
-  const my   = records.filter(function(r) { return r.사용자 === username && r.년월 === ym; });
-  // 초대 알림: 본인 앞으로 온 레코드 중 대기 상태인 것 (등록자가 본인이 아닌 것)
-  const pend = records.filter(function(r) {
-    return r.상태 === "대기" && r.등록자 !== username;
-  });
+  var my   = records.filter(function(r){ return r.사용자 === username && r.년월 === ym; });
+  var pend = records.filter(function(r){ return r.상태 === "대기" && r.등록자 !== username; });
 
-  const annRecs = my.filter(function(r) { return r.유형 === "연차"; });
-  const dinRecs = my.filter(function(r) { return r.유형 === "회식"; });
-  const entRecs = my.filter(function(r) { return r.유형 === "접대"; });
-  const payRecs = my.filter(function(r) { return r.유형 === "결제"; });
+  var annRecs = my.filter(function(r){ return r.유형 === "연차"; });
+  var dinRecs = my.filter(function(r){ return r.유형 === "회식"; });
+  var entRecs = my.filter(function(r){ return r.유형 === "접대"; });
+  var payRecs = my.filter(function(r){ return r.유형 === "결제"; });
 
-  const annCnt = annRecs.length;
-  const dinCnt = dinRecs.filter(function(r) { return r.상태 === "확인"; }).length;
-  const entCnt = entRecs.filter(function(r) { return r.상태 === "확인"; }).length;
-  const payTot = payRecs.reduce(function(s, r) { return s + (r.금액 || 0); }, 0);
-  const eff    = Math.max(0, wd.length - annCnt - dinCnt - entCnt);
-  const tot    = eff * MEAL_PRICE;
-  const rem    = tot - payTot;
-  const rate   = tot > 0 ? Math.round((payTot / tot) * 100) : 0;
+  var annCnt = annRecs.length;
+  var dinCnt = dinRecs.filter(function(r){ return r.상태 === "확인"; }).length;
+  var entCnt = entRecs.filter(function(r){ return r.상태 === "확인"; }).length;
+  var payTot = payRecs.reduce(function(s,r){ return s + (r.금액||0); }, 0);
+  var eff    = Math.max(0, wd.length - annCnt - dinCnt - entCnt);
+  var tot    = eff * MEAL_PRICE;
+  var rem    = tot - payTot;
+  var rate   = tot > 0 ? Math.round((payTot / tot) * 100) : 0;
 
-  // 카드 업데이트
-  document.getElementById("main-user").textContent     = "👤 " + username;
-  document.getElementById("c-total").textContent       = tot.toLocaleString() + "원";
-  document.getElementById("c-total-sub").textContent   = "유효근무일 " + eff + "일 × " + MEAL_PRICE.toLocaleString() + "원";
-  document.getElementById("c-days").textContent        = wd.length + "일";
-  document.getElementById("c-days-sub").textContent    = "연차 -" + annCnt + " · 회식 -" + dinCnt + " · 접대 -" + entCnt;
-  document.getElementById("c-remain").textContent      = rem.toLocaleString() + "원";
-  document.getElementById("c-remain").style.color      = rem >= 0 ? "var(--grn)" : "var(--red)";
-  document.getElementById("c-remain-card").className   = "card " + (rem >= 0 ? "cg" : "cr");
-  document.getElementById("c-remain-sub").textContent  = "결제 " + payTot.toLocaleString() + "원";
-  document.getElementById("c-rate").textContent        = rate + "%";
-  const bar = document.getElementById("c-rate-bar");
-  bar.style.width  = Math.min(100, rate) + "%";
-  bar.className    = "pfill" + (rate > 90 ? " warn" : "");
-
+  document.getElementById("main-user").textContent    = "👤 " + username;
+  document.getElementById("c-total").textContent      = tot.toLocaleString() + "원";
+  document.getElementById("c-total-sub").textContent  = "유효근무일 " + eff + "일 × " + MEAL_PRICE.toLocaleString() + "원";
+  document.getElementById("c-days").textContent       = wd.length + "일";
+  document.getElementById("c-days-sub").textContent   = "연차 -" + annCnt + " · 회식 -" + dinCnt + " · 접대 -" + entCnt;
+  document.getElementById("c-remain").textContent     = rem.toLocaleString() + "원";
+  document.getElementById("c-remain").style.color     = rem >= 0 ? "var(--grn)" : "var(--red)";
+  document.getElementById("c-remain-card").className  = "card " + (rem >= 0 ? "cg" : "cr");
+  document.getElementById("c-remain-sub").textContent = "결제 " + payTot.toLocaleString() + "원";
+  document.getElementById("c-rate").textContent       = rate + "%";
+  var bar = document.getElementById("c-rate-bar");
+  bar.style.width = Math.min(100, rate) + "%";
+  bar.className   = "pfill" + (rate > 90 ? " warn" : "");
   document.getElementById("ann-cnt").textContent = annCnt + "일";
   document.getElementById("din-cnt").textContent = dinCnt + "회";
   document.getElementById("ent-cnt").textContent = entCnt + "회";
   document.getElementById("pay-cnt").textContent = payTot.toLocaleString() + "원";
 
   // 월 네비게이션 (현재월 기준 앞뒤 2달)
-  const nav = document.getElementById("month-nav");
+  var nav  = document.getElementById("month-nav");
   nav.innerHTML = "";
-  const now = new Date();
-  const months = [];
+  var now    = new Date();
+  var months = [];
   for (var i = -2; i <= 2; i++) {
-    const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+    var d = new Date(now.getFullYear(), now.getMonth() + i, 1);
     months.push({y: d.getFullYear(), m: d.getMonth() + 1});
   }
   var lastY = null;
   months.forEach(function(item) {
     if (item.y !== lastY) {
-      const tag = document.createElement("span");
-      tag.className   = "ytag";
-      tag.textContent = item.y;
-      nav.appendChild(tag);
-      lastY = item.y;
+      var tag = document.createElement("span");
+      tag.className = "ytag"; tag.textContent = item.y;
+      nav.appendChild(tag); lastY = item.y;
     }
-    const btn = document.createElement("button");
+    var btn = document.createElement("button");
     btn.className   = "mbtn" + (selYear === item.y && selMonth === item.m ? " on" : "");
     btn.textContent = item.m + "월";
-    btn.onclick     = (function(y, m) {
-      return function() {
+    btn.onclick = (function(y, m){
+      return function(){
         selYear = y; selMonth = m; records = [];
-        updateUI(); loadRecords();
+        updateUI();
+        loadRecords();
       };
     })(item.y, item.m);
     nav.appendChild(btn);
   });
 
   // 초대 알림
-  const ia = document.getElementById("invites-area");
+  var ia = document.getElementById("invites-area");
   ia.innerHTML = "";
   pend.forEach(function(inv) {
-    const d = document.createElement("div");
-    d.className = "notif";
-    const txt = document.createElement("div");
-    txt.className = "ntxt";
+    var d   = document.createElement("div"); d.className = "notif";
+    var txt = document.createElement("div"); txt.className = "ntxt";
     txt.innerHTML = "📨 <strong>" + inv.등록자 + "</strong>님이 <strong>" + inv.유형 + "</strong> 초대 · " + inv.날짜;
-    const acts = document.createElement("div");
-    acts.className = "nact";
-    const okBtn = document.createElement("button");
-    okBtn.className = "bsm bok"; okBtn.textContent = "✓ 확인";
-    okBtn.onclick = (function(r) { return function() { doInvite(r, true); }; })(inv);
-    const noBtn = document.createElement("button");
-    noBtn.className = "bsm bno"; noBtn.textContent = "✕ 거절";
-    noBtn.onclick = (function(r) { return function() { doInvite(r, false); }; })(inv);
+    var acts  = document.createElement("div"); acts.className = "nact";
+    var okBtn = document.createElement("button"); okBtn.className = "bsm bok"; okBtn.textContent = "✓ 확인";
+    okBtn.onclick = (function(r){ return function(){ doInvite(r, true); }; })(inv);
+    var noBtn = document.createElement("button"); noBtn.className = "bsm bno"; noBtn.textContent = "✕ 거절";
+    noBtn.onclick = (function(r){ return function(){ doInvite(r, false); }; })(inv);
     acts.appendChild(okBtn); acts.appendChild(noBtn);
-    d.appendChild(txt); d.appendChild(acts);
-    ia.appendChild(d);
+    d.appendChild(txt); d.appendChild(acts); ia.appendChild(d);
   });
 
   // 레코드 목록
-  renderList("ann-list", annRecs, function(r) {
+  renderList("ann-list", annRecs, function(r){
     return '<span class="tag ty">연차</span>';
   });
-  renderList("din-list", dinRecs, function(r) {
-    const sc = r.상태 === "확인" ? "tok" : r.상태 === "거절" ? "tno" : "tpnd";
-    return '<span class="tag td">회식</span>'
-      + (r.참석자 ? '<span class="ratt">👥 ' + r.참석자 + '</span>' : '')
-      + '<span class="tag ' + sc + '">' + (r.상태 || "확인") + '</span>';
+  renderList("din-list", dinRecs, function(r){
+    var sc = r.상태==="확인"?"tok":r.상태==="거절"?"tno":"tpnd";
+    return '<span class="tag td">회식</span>' + (r.참석자?'<span class="ratt">👥 '+r.참석자+'</span>':'') + '<span class="tag '+sc+'">'+(r.상태||"확인")+'</span>';
   });
-  renderList("ent-list", entRecs, function(r) {
-    const sc = r.상태 === "확인" ? "tok" : r.상태 === "거절" ? "tno" : "tpnd";
-    return '<span class="tag te">접대</span>'
-      + (r.참석자 ? '<span class="ratt">👥 ' + r.참석자 + '</span>' : '')
-      + '<span class="tag ' + sc + '">' + (r.상태 || "확인") + '</span>';
+  renderList("ent-list", entRecs, function(r){
+    var sc = r.상태==="확인"?"tok":r.상태==="거절"?"tno":"tpnd";
+    return '<span class="tag te">접대</span>' + (r.참석자?'<span class="ratt">👥 '+r.참석자+'</span>':'') + '<span class="tag '+sc+'">'+(r.상태||"확인")+'</span>';
   });
-  renderList("pay-list", payRecs, function(r) {
-    return '<span class="tag tp">결제</span>'
-      + (r.메모 ? '<span class="rmemo">' + r.메모 + '</span>' : '')
-      + '<span class="ramt">' + (r.금액 || 0).toLocaleString() + '원</span>';
+  renderList("pay-list", payRecs, function(r){
+    return '<span class="tag tp">결제</span>' + (r.메모?'<span class="rmemo">'+r.메모+'</span>':'') + '<span class="ramt">'+(r.금액||0).toLocaleString()+'원</span>';
   });
 }
 
 function renderList(id, recs, infoHtml) {
-  const el = document.getElementById(id);
+  var el = document.getElementById(id);
   el.innerHTML = "";
-  if (!recs.length) {
-    el.innerHTML = '<div class="empty">등록된 항목이 없습니다</div>';
-    return;
-  }
+  if (!recs.length) { el.innerHTML = '<div class="empty">등록된 항목이 없습니다</div>'; return; }
   recs.forEach(function(r) {
-    const row  = document.createElement("div");
-    row.className = "ritem";
-    const date = document.createElement("div");
-    date.className = "rdate"; date.textContent = r.날짜;
-    const info = document.createElement("div");
-    info.className = "rinfo"; info.innerHTML = infoHtml(r);
-    const act  = document.createElement("div");
-    act.className = "ract";
-
-    // 삭제 버튼 표시 조건:
-    // - 연차/결제: 항상 표시 (본인 레코드만 있음)
-    // - 회식/접대: 등록자(본인이 만든 것)이거나 이미 확인한 경우에만 표시
-    //             타인이 초대한 것이고 아직 대기 상태면 숨김
-    const isGuestPending = (r.유형 === "회식" || r.유형 === "접대")
-      && r.등록자 !== username
-      && r.상태 === "대기";
-
+    var row  = document.createElement("div"); row.className = "ritem";
+    var date = document.createElement("div"); date.className = "rdate"; date.textContent = r.날짜;
+    var info = document.createElement("div"); info.className = "rinfo"; info.innerHTML = infoHtml(r);
+    var act  = document.createElement("div"); act.className = "ract";
+    // 삭제 버튼: 회식/접대 + 타인 등록 + 대기 상태면 숨김
+    var isGuestPending = (r.유형==="회식"||r.유형==="접대") && r.등록자!==username && r.상태==="대기";
     if (!isGuestPending) {
-      const del = document.createElement("button");
-      del.className = "bsm bdel"; del.textContent = "삭제";
-      del.onclick = (function(rid) { return function() { doDelete(rid); }; })(r.id);
+      var del = document.createElement("button"); del.className = "bsm bdel"; del.textContent = "삭제";
+      del.onclick = (function(rid){ return function(){ doDelete(rid); }; })(r.id);
       act.appendChild(del);
     }
-
     row.appendChild(date); row.appendChild(info); row.appendChild(act);
     el.appendChild(row);
   });
@@ -707,83 +579,68 @@ function renderList(id, recs, infoHtml) {
 // 액션
 // ══════════════════════════════════════════════════════════
 async function doAdd(type) {
-  const labels = {annual: "연차", dinner: "회식", entertain: "접대", payment: "결제"};
-  const lbl = labels[type];
-  const ym  = selYear + "-" + String(selMonth).padStart(2, "0");
+  var labels = {annual:"연차", dinner:"회식", entertain:"접대", payment:"결제"};
+  var lbl = labels[type];
+  var ym  = selYear + "-" + String(selMonth).padStart(2,"0");
+  var date="", att="", amt=0, memo="";
 
-  var date = "", att = "", amt = 0, memo = "";
-  if (type === "annual")     { date = document.getElementById("ann-date").value; }
-  if (type === "dinner")     { date = document.getElementById("din-date").value; att = document.getElementById("din-att").value.trim(); }
-  if (type === "entertain")  { date = document.getElementById("ent-date").value; att = document.getElementById("ent-att").value.trim(); }
-  if (type === "payment")    { date = document.getElementById("pay-date").value; amt = parseFloat(document.getElementById("pay-amt").value) || 0; memo = document.getElementById("pay-memo").value; }
+  if (type==="annual")    { date = document.getElementById("ann-date").value; }
+  if (type==="dinner")    { date = document.getElementById("din-date").value; att = document.getElementById("din-att").value.trim(); }
+  if (type==="entertain") { date = document.getElementById("ent-date").value; att = document.getElementById("ent-att").value.trim(); }
+  if (type==="payment")   { date = document.getElementById("pay-date").value; amt = parseFloat(document.getElementById("pay-amt").value)||0; memo = document.getElementById("pay-memo").value; }
   if (!date) return;
 
-  const btnId = {annual: "ann-add", dinner: "din-add", entertain: "ent-add", payment: "pay-add"}[type];
-  const btn = document.getElementById(btnId);
-  btn.disabled = true;
-  btn.innerHTML = '<div class="spin"></div>';
+  var btnId = {annual:"ann-add",dinner:"din-add",entertain:"ent-add",payment:"pay-add"}[type];
+  var btn = document.getElementById(btnId);
+  btn.disabled = true; btn.innerHTML = '<div class="spin"></div>';
   setSyncing(true);
 
   try {
-    const attList = att ? att.split(",").map(function(s) { return s.trim(); }).filter(Boolean) : [];
-    const allAtt  = attList.length ? [username].concat(attList).join(", ") : "";
+    var attList = att ? att.split(",").map(function(s){ return s.trim(); }).filter(Boolean) : [];
+    var allAtt  = attList.length ? [username].concat(attList).join(", ") : "";
 
-    // 등록자 본인 레코드 (확인)
-    const myProps = {
-      "제목":   pTitle(username + "_" + date + "_" + lbl),
-      "사용자": pText(username),
-      "년월":   pText(ym),
-      "유형":   pSel(lbl),
-      "날짜":   pDate(date),
-      "참석자": pText(allAtt),
-      "금액":   pNum(amt),
-      "상태":   pSel("확인"),
-      "등록자": pText(username),
-      "메모":   pText(memo)
-    };
-    const myPg = await nCreate(RECORDS_DB, myProps);
-    records.push(parseRecord(myPg));
+    // 등록자 본인 레코드 + 참석자 레코드 병렬 생성
+    var toCreate = [{
+      "제목":   pTitle(username+"_"+date+"_"+lbl),
+      "사용자": pText(username), "년월": pText(ym), "유형": pSel(lbl),
+      "날짜":   pDate(date),     "참석자": pText(allAtt),
+      "금액":   pNum(amt),       "상태": pSel("확인"),
+      "등록자": pText(username), "메모": pText(memo)
+    }];
 
-    // 참석자별 레코드 (대기) - 회식/접대만
-    if ((type === "dinner" || type === "entertain") && attList.length > 0) {
-      for (var i = 0; i < attList.length; i++) {
-        const person = attList[i];
-        const attProps = {
-          "제목":   pTitle(person + "_" + date + "_" + lbl),
-          "사용자": pText(person),
-          "년월":   pText(ym),
-          "유형":   pSel(lbl),
-          "날짜":   pDate(date),
-          "참석자": pText(allAtt),
-          "금액":   pNum(0),
-          "상태":   pSel("대기"),
-          "등록자": pText(username),
-          "메모":   pText(memo)
-        };
-        const attPg = await nCreate(RECORDS_DB, attProps);
-        records.push(parseRecord(attPg));
-      }
+    if ((type==="dinner"||type==="entertain") && attList.length > 0) {
+      attList.forEach(function(person) {
+        toCreate.push({
+          "제목":   pTitle(person+"_"+date+"_"+lbl),
+          "사용자": pText(person),   "년월": pText(ym), "유형": pSel(lbl),
+          "날짜":   pDate(date),     "참석자": pText(allAtt),
+          "금액":   pNum(0),         "상태": pSel("대기"),
+          "등록자": pText(username), "메모": pText(memo)
+        });
+      });
     }
 
+    // 모두 병렬 생성
+    var pages = await Promise.all(toCreate.map(function(props){ return nCreate(RECORDS_DB, props); }));
+    pages.forEach(function(pg){ records.push(parseRecord(pg)); });
+
     // 입력 초기화
-    if (type === "annual")    document.getElementById("ann-date").value = "";
-    if (type === "dinner")    { document.getElementById("din-date").value = ""; document.getElementById("din-att").value = ""; }
-    if (type === "entertain") { document.getElementById("ent-date").value = ""; document.getElementById("ent-att").value = ""; }
-    if (type === "payment")   { document.getElementById("pay-date").value = ""; document.getElementById("pay-amt").value = ""; document.getElementById("pay-memo").value = ""; }
+    if (type==="annual")    { document.getElementById("ann-date").value = ""; }
+    if (type==="dinner")    { document.getElementById("din-date").value = ""; document.getElementById("din-att").value = ""; }
+    if (type==="entertain") { document.getElementById("ent-date").value = ""; document.getElementById("ent-att").value = ""; }
+    if (type==="payment")   { document.getElementById("pay-date").value = ""; document.getElementById("pay-amt").value = ""; document.getElementById("pay-memo").value = ""; }
 
     updateUI();
   } catch(e) {
     console.error("doAdd 오류:", e);
     alert("저장 실패: " + e.message);
   }
-
   setSyncing(false);
-  btn.disabled = false;
-  btn.textContent = "+ 추가";
+  btn.disabled = false; btn.textContent = "+ 추가";
 }
 
 async function doDelete(id) {
-  records = records.filter(function(r) { return r.id !== id; });
+  records = records.filter(function(r){ return r.id !== id; });
   updateUI();
   setSyncing(true);
   try { await nDelete(id); } catch(e) { console.error(e); }
@@ -794,122 +651,99 @@ async function doInvite(rec, accept) {
   setSyncing(true);
   try {
     if (accept) {
-      // 확인: 본인 레코드만 확인 처리
-      records = records.map(function(r) {
-        return r.id === rec.id ? Object.assign({}, r, {상태: "확인"}) : r;
-      });
+      records = records.map(function(r){ return r.id===rec.id ? Object.assign({},r,{상태:"확인"}) : r; });
+      updateUI();
       await nUpdate(rec.id, {"상태": pSel("확인")});
-
     } else {
-      // 거절: 본인 레코드 삭제
-      records = records.filter(function(r) { return r.id !== rec.id; });
-      await nDelete(rec.id);
-
-      // 노션에서 같은 그룹(등록자+날짜+유형) 레코드 직접 조회 후 참석자에서 본인 이름 제거
-      const groupRecs = await nQuery(RECORDS_DB, {and: [
-        {property: "등록자", rich_text: {equals: rec.등록자}},
-        {property: "날짜",   date:       {equals: rec.날짜}},
-        {property: "유형",   select:     {equals: rec.유형}}
+      // 거절: 본인 레코드 삭제 + 같은 그룹 참석자 필드에서 이름 제거 (병렬)
+      records = records.filter(function(r){ return r.id !== rec.id; });
+      updateUI();
+      var groupRecs = await nQuery(RECORDS_DB, {and:[
+        {property:"등록자", rich_text:{equals:rec.등록자}},
+        {property:"날짜",   date:{equals:rec.날짜}},
+        {property:"유형",   select:{equals:rec.유형}}
       ]});
-      for (var i = 0; i < groupRecs.length; i++) {
-        const gr = groupRecs[i];
-        const curAtt = gr.properties["참석자"]?.rich_text?.[0]?.plain_text || "";
-        const newAtt = curAtt
-          .split(",")
-          .map(function(s) { return s.trim(); })
-          .filter(function(s) { return s && s !== username; })
-          .join(", ");
+      var tasks = [nDelete(rec.id)];
+      groupRecs.forEach(function(gr) {
+        var curAtt = gr.properties["참석자"]?.rich_text?.[0]?.plain_text || "";
+        var newAtt = curAtt.split(",").map(function(s){ return s.trim(); })
+          .filter(function(s){ return s && s !== username; }).join(", ");
         if (newAtt !== curAtt) {
-          // 로컬 records에도 반영
-          records = records.map(function(x) {
-            return x.id === gr.id ? Object.assign({}, x, {참석자: newAtt}) : x;
-          });
-          await nUpdate(gr.id, {"참석자": pText(newAtt)});
+          records = records.map(function(x){ return x.id===gr.id ? Object.assign({},x,{참석자:newAtt}) : x; });
+          tasks.push(nUpdate(gr.id, {"참석자": pText(newAtt)}));
         }
-      }
+      });
+      await Promise.all(tasks); // 삭제 + 업데이트 병렬 처리
     }
   } catch(e) { console.error(e); }
   setSyncing(false);
-  updateUI();
 }
 
 // ══════════════════════════════════════════════════════════
-// 인증 화면
+// 인증
 // ══════════════════════════════════════════════════════════
 function initPwScreen() {
   showScreen("screen-pw");
-  const inp = document.getElementById("pw-input");
-  const err = document.getElementById("pw-err");
-  const btn = document.getElementById("pw-btn");
+  var inp = document.getElementById("pw-input");
+  var err = document.getElementById("pw-err");
+  var btn = document.getElementById("pw-btn");
   inp.value = ""; err.textContent = "";
-  setTimeout(function() { inp.focus(); }, 100);
+  setTimeout(function(){ inp.focus(); }, 100);
 
   btn.onclick = submitPw;
-  inp.onkeydown = function(e) { if (e.key === "Enter") submitPw(); };
+  inp.onkeydown = function(e){ if(e.key==="Enter") submitPw(); };
 
   async function submitPw() {
     if (inp.value !== TEAM_PW) { err.textContent = "비밀번호가 올바르지 않습니다."; return; }
-    btn.disabled = true;
-    btn.innerHTML = '<div class="spin" style="margin:0 auto"></div>';
+    btn.disabled = true; btn.innerHTML = '<div class="spin" style="margin:0 auto"></div>';
     try {
-      const pgs = await nQuery(USERS_DB, undefined);
-      knownUsers = pgs.map(function(p) {
-        return p.properties["이름"]?.title?.[0]?.plain_text || "";
-      }).filter(Boolean);
+      var pgs = await nQuery(USERS_DB, undefined);
+      knownUsers = pgs.map(function(p){ return p.properties["이름"]?.title?.[0]?.plain_text || ""; }).filter(Boolean);
     } catch(e) { console.error(e); }
-    btn.disabled = false;
-    btn.textContent = "입장하기 →";
+    btn.disabled = false; btn.textContent = "입장하기 →";
     initNameScreen();
   }
 }
 
 function initNameScreen() {
   showScreen("screen-name");
-  const inp  = document.getElementById("name-input");
-  const ac   = document.getElementById("name-ac");
-  const err  = document.getElementById("name-err");
-  const btn  = document.getElementById("name-btn");
-  const back = document.getElementById("name-back");
+  var inp  = document.getElementById("name-input");
+  var ac   = document.getElementById("name-ac");
+  var err  = document.getElementById("name-err");
+  var btn  = document.getElementById("name-btn");
+  var back = document.getElementById("name-back");
   inp.value = ""; err.textContent = ""; ac.classList.add("hidden");
-  setTimeout(function() { inp.focus(); }, 100);
+  setTimeout(function(){ inp.focus(); }, 100);
 
   inp.oninput = function() {
-    const v = inp.value;
-    const matches = v
-      ? knownUsers.filter(function(u) { return u.includes(v) && u !== v; })
-      : knownUsers;
+    var v = inp.value;
+    var matches = v ? knownUsers.filter(function(u){ return u.includes(v) && u!==v; }) : knownUsers;
     if (matches.length) {
       ac.innerHTML = "";
-      matches.slice(0, 6).forEach(function(u) {
-        const item = document.createElement("div");
-        item.className = "aaci";
-        item.textContent = "👤 " + u;
-        item.onmousedown = function() { inp.value = u; ac.classList.add("hidden"); };
+      matches.slice(0,6).forEach(function(u) {
+        var item = document.createElement("div"); item.className = "aaci"; item.textContent = "👤 " + u;
+        item.onmousedown = function(){ inp.value = u; ac.classList.add("hidden"); };
         ac.appendChild(item);
       });
       ac.classList.remove("hidden");
-    } else {
-      ac.classList.add("hidden");
-    }
+    } else { ac.classList.add("hidden"); }
   };
-  inp.onfocus = function() { inp.oninput(); };
-  inp.onblur  = function() { setTimeout(function() { ac.classList.add("hidden"); }, 200); };
-  btn.onclick = submitName;
-  inp.onkeydown = function(e) { if (e.key === "Enter") submitName(); };
-  back.onclick  = initPwScreen;
+  inp.onfocus  = function(){ inp.oninput(); };
+  inp.onblur   = function(){ setTimeout(function(){ ac.classList.add("hidden"); }, 200); };
+  btn.onclick  = submitName;
+  inp.onkeydown = function(e){ if(e.key==="Enter") submitName(); };
+  back.onclick = initPwScreen;
 
   async function submitName() {
     if (!inp.value.trim()) { err.textContent = "이름을 입력해주세요."; return; }
-    btn.disabled = true;
-    btn.innerHTML = '<div class="spin" style="margin:0 auto"></div>';
+    btn.disabled = true; btn.innerHTML = '<div class="spin" style="margin:0 auto"></div>';
     try {
-      const ex = await nQuery(USERS_DB, {property: "이름", title: {equals: inp.value.trim()}});
+      var ex = await nQuery(USERS_DB, {property:"이름", title:{equals:inp.value.trim()}});
       if (!ex.length) await nCreate(USERS_DB, {"이름": pTitle(inp.value.trim())});
     } catch(e) { console.error(e); }
     username = inp.value.trim();
     localStorage.setItem("ml_usr", username);
-    btn.disabled = false;
-    btn.textContent = "시작하기 →";
+    btn.disabled = false; btn.textContent = "시작하기 →";
     initMainScreen();
   }
 }
@@ -917,14 +751,12 @@ function initNameScreen() {
 function initMainScreen() {
   showScreen("screen-main");
   document.getElementById("logout-btn").onclick = function() {
-    localStorage.removeItem("ml_usr");
-    username = ""; records = [];
-    initPwScreen();
+    localStorage.removeItem("ml_usr"); username = ""; records = []; initPwScreen();
   };
-  document.getElementById("ann-add").onclick = function() { doAdd("annual"); };
-  document.getElementById("din-add").onclick = function() { doAdd("dinner"); };
-  document.getElementById("ent-add").onclick = function() { doAdd("entertain"); };
-  document.getElementById("pay-add").onclick = function() { doAdd("payment"); };
+  document.getElementById("ann-add").onclick = function(){ doAdd("annual"); };
+  document.getElementById("din-add").onclick = function(){ doAdd("dinner"); };
+  document.getElementById("ent-add").onclick = function(){ doAdd("entertain"); };
+  document.getElementById("pay-add").onclick = function(){ doAdd("payment"); };
   updateUI();
   loadRecords();
 }
@@ -934,35 +766,25 @@ function initMainScreen() {
 // ══════════════════════════════════════════════════════════
 var deferredPrompt = null;
 window.addEventListener("beforeinstallprompt", function(e) {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (!localStorage.getItem("pwa_no")) {
-    document.getElementById("ib").classList.remove("hidden");
-  }
+  e.preventDefault(); deferredPrompt = e;
+  if (!localStorage.getItem("pwa_no")) document.getElementById("ib").classList.remove("hidden");
 });
 document.getElementById("ib-ok").onclick = function() {
   document.getElementById("ib").classList.add("hidden");
   if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; }
 };
 document.getElementById("ib-no").onclick = function() {
-  document.getElementById("ib").classList.add("hidden");
-  localStorage.setItem("pwa_no", "1");
+  document.getElementById("ib").classList.add("hidden"); localStorage.setItem("pwa_no","1");
 };
 
 // ══════════════════════════════════════════════════════════
 // 시작
 // ══════════════════════════════════════════════════════════
 var savedUser = localStorage.getItem("ml_usr");
-if (savedUser) {
-  username = savedUser;
-  initMainScreen();
-} else {
-  initPwScreen();
-}
+if (savedUser) { username = savedUser; initMainScreen(); }
+else initPwScreen();
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js").catch(function() {});
-}
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function(){});
 </script>
 </body>
 </html>
