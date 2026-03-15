@@ -341,9 +341,7 @@ function calcWorkdays(year, month) {
 // ══════════════════════════════════════════════════════════
 var _bestProxy = 0;
 var PROXIES = [
-  function(u){ return "https://corsproxy.io/?url=" + encodeURIComponent(u); },
-  function(u){ return "https://api.allorigins.win/raw?url=" + encodeURIComponent(u); },
-  function(u){ return "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u); }
+  function(u){ return "https://notion-proxy.hidong2772.workers.dev/?url=" + encodeURIComponent(u); }
 ];
 
 // 공통 fetch (프록시 자동 선택, 성공한 프록시 기억)
