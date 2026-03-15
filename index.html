@@ -371,7 +371,7 @@ async function fetchHolidays(year, month) {
       + "&solMonth=" + String(month).padStart(2, "0")
       + "&numOfRows=20&_type=json"
       + "&ServiceKey=" + HOLIDAY_API_KEY;
-    const res = await fetch("https://corsproxy.io/?url=" + encodeURIComponent(url));
+    const res = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url));
     const data = await res.json();
     const items = data?.response?.body?.items?.item;
     if (items) {
@@ -420,7 +420,7 @@ async function getWorkdays(year, month) {
 // ══════════════════════════════════════════════════════════
 async function nReq(method, path, body) {
   const url = "https://api.notion.com/v1" + path;
-  const proxied = "https://corsproxy.io/?url=" + encodeURIComponent(url);
+  const proxied = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
   const opts = {
     method: method,
     headers: {
