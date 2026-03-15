@@ -1,21 +1,9 @@
-const CACHE = "meal-v4";
-
-self.addEventListener("install", e => {
-  self.skipWaiting();
-});
-
+// 서비스 워커 - 아무것도 캐시하지 않고 모든 요청을 네트워크로 통과
+self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => {
   e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.map(k => caches.delete(k)))
-    )
+    caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))))
   );
   self.clients.claim();
 });
-
-self.addEventListener("fetch", e => {
-  // 모든 요청 그냥 네트워크에서 가져오기 (캐시 안 씀)
-  e.respondWith(fetch(e.request).catch(() => {
-    return caches.match(e.request);
-  }));
-});
+// fetch 이벤트 핸들러 없음 = 브라우저가 직접 네트워크 요청 처리
