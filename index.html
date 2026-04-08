@@ -336,6 +336,13 @@ function calcWorkdays(year, month) {
   return result;
 }
 
+// 날짜 오름차순 정렬
+function sortRecords() {
+  records.sort(function(a, b) {
+    return a.날짜 < b.날짜 ? -1 : a.날짜 > b.날짜 ? 1 : 0;
+  });
+}
+
 // ══════════════════════════════════════════════════════════
 // Notion API (프록시 자동 선택)
 // ══════════════════════════════════════════════════════════
@@ -440,9 +447,8 @@ async function loadRecords() {
       ]}),
       fetchHolidays(selYear, selMonth) // 공휴일 캐시 채우기
     ]);
-    records = results[0].map(parseRecord).sort(function(a, b) {
-      return a.날짜 < b.날짜 ? -1 : a.날짜 > b.날짜 ? 1 : 0;
-    });
+    records = results[0].map(parseRecord);
+    sortRecords();
   } catch(e) {
     console.error("loadRecords 오류:", e);
   }
@@ -623,6 +629,7 @@ async function doAdd(type) {
     // 모두 병렬 생성
     var pages = await Promise.all(toCreate.map(function(props){ return nCreate(RECORDS_DB, props); }));
     pages.forEach(function(pg){ records.push(parseRecord(pg)); });
+    sortRecords();
 
     // 입력 초기화
     if (type==="annual")    { document.getElementById("ann-date").value = ""; }
