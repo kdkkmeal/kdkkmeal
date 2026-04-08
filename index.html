@@ -440,7 +440,9 @@ async function loadRecords() {
       ]}),
       fetchHolidays(selYear, selMonth) // 공휴일 캐시 채우기
     ]);
-    records = results[0].map(parseRecord);
+    records = results[0].map(parseRecord).sort(function(a, b) {
+      return a.날짜 < b.날짜 ? -1 : a.날짜 > b.날짜 ? 1 : 0;
+    });
   } catch(e) {
     console.error("loadRecords 오류:", e);
   }
